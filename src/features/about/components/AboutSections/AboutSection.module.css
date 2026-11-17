@@ -1,0 +1,249 @@
+.section {
+  --row-gap: 22px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--row-gap);
+  padding-block: clamp(24px, 2.6vw, 34px);
+  border-top: 1px solid var(--color-line);
+  /* Room for the sticky chip bar when jumping here on phones/tablets. */
+  scroll-margin-top: 72px;
+}
+
+.section:first-child {
+  padding-top: 4px;
+  border-top: 0;
+}
+
+@media (min-width: 760px) {
+  .section {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: clamp(24px, 3vw, 44px);
+    align-items: center;
+  }
+}
+
+@media (min-width: 1100px) {
+  .section {
+    scroll-margin-top: 24px;
+  }
+}
+
+/* ---------- Picture ---------- */
+
+.media {
+  justify-self: center;
+  width: 100%;
+  max-width: 460px;
+}
+
+@media (min-width: 760px) {
+  .media {
+    max-width: none;
+  }
+}
+
+/* ---------- Text column ---------- */
+
+/* Phones: the number badge sits above the heading so the text keeps the
+   full width. From 760px it sits beside the heading, as in the design. */
+.text {
+  --text-col: 1;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: clamp(12px, 1.2vw, 18px);
+  align-content: center;
+}
+
+@media (min-width: 760px) {
+  .text {
+    --text-col: 2;
+
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+}
+
+.badge {
+  display: inline-grid;
+  place-items: center;
+  align-self: start;
+  justify-self: start;
+  min-width: 52px;
+  height: 36px;
+  margin: 0 0 12px;
+  padding-inline: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e2f5bf 0%, var(--color-lime-200) 100%);
+  box-shadow: inset 0 0 0 1px rgba(96, 190, 6, 0.12);
+  color: var(--color-forest-700);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 760px) {
+  .badge {
+    margin: 1px 0 0;
+  }
+}
+
+.copy {
+  min-width: 0;
+}
+
+.title {
+  color: var(--color-forest-700);
+  font-size: clamp(22px, 2.1vw, 30px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Short green rule under each heading. */
+.title::after {
+  content: '';
+  display: block;
+  width: 46px;
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 3px;
+  background: var(--color-leaf-600);
+}
+
+.tagline {
+  margin-top: 12px;
+  color: var(--color-leaf-600);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.quote {
+  position: relative;
+  margin-top: 14px;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--color-leaf-500);
+  color: var(--color-forest-600);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.intro {
+  margin-top: 12px;
+  color: var(--color-text-700);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: var(--color-mist-50);
+  border: 1px solid #e1eed3;
+  color: var(--color-forest-700);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.chipIcon {
+  width: 15px;
+  height: 15px;
+  color: var(--color-leaf-600);
+}
+
+/* Highlights inside the text column. */
+.fullWidth {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+}
+
+.inText {
+  grid-column: var(--text-col);
+  margin-top: 20px;
+}
+
+/* ---------- Read more ---------- */
+
+.readMore {
+  grid-column: var(--text-col);
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 9px 16px 9px 18px;
+  border: 1.5px solid var(--color-leaf-600);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-forest-600);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.readMore:hover {
+  background: var(--color-mist-50);
+}
+
+.readMore:focus-visible {
+  outline: 2px solid var(--color-leaf-600);
+  outline-offset: 3px;
+}
+
+.readMoreIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.readMore[aria-expanded='true'] .readMoreIcon {
+  transform: rotate(180deg);
+}
+
+/* Highlights on the right of a 'split' row. */
+.aside {
+  min-width: 0;
+}
+
+/* Collapsible panel under the row. Animates its height by moving the grid
+   row between 0fr and 1fr; while closed it also cancels the row gap above it
+   so a closed panel takes no space. */
+.more {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: calc(-1 * var(--row-gap));
+  transition:
+    grid-template-rows 0.45s var(--ease-out),
+    margin-top 0.45s var(--ease-out);
+}
+
+.more[data-open='true'] {
+  grid-template-rows: 1fr;
+  margin-top: 4px;
+}
+
+.moreInner {
+  min-height: 0;
+  overflow: hidden;
+}

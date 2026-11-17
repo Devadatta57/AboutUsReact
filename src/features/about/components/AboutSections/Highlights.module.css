@@ -1,0 +1,376 @@
+/* A size container, so stats and covers choose 2 or 4 per row from the
+   space they actually get (a narrow column beside the text on tablets and
+   small laptops), not from the screen width. */
+.highlights {
+  min-width: 0;
+  container-type: inline-size;
+}
+
+/* Colour tones shared by tiles and stats. */
+.green {
+  --tone-bg: linear-gradient(165deg, #f3fbec 0%, #e3f4d6 100%);
+  --tone-fg: var(--color-leaf-600);
+}
+
+.orange {
+  --tone-bg: linear-gradient(165deg, #fff7ec 0%, #ffe9d0 100%);
+  --tone-fg: #f08a00;
+}
+
+.blue {
+  --tone-bg: linear-gradient(165deg, #f1f7fe 0%, #e0edfb 100%);
+  --tone-fg: var(--color-sky-600);
+}
+
+.rose {
+  --tone-bg: linear-gradient(165deg, #fff4f2 0%, #fde3df 100%);
+  --tone-fg: #ea6a1f;
+}
+
+/* ---------- Tiles (Key Activities) ---------- */
+
+.tiles,
+.stats,
+.covers,
+.tiers,
+.pins {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tiles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 520px) {
+  .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  background: var(--tone-bg, var(--color-mist-50));
+  box-shadow: 0 14px 26px -22px rgba(30, 50, 20, 0.45);
+  text-align: center;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+}
+
+.tileIcon {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 4px;
+  color: var(--tone-fg, var(--color-leaf-600));
+}
+
+.tileLabel {
+  color: var(--color-ink-900);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tileCaption {
+  color: var(--color-text-500);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* ---------- Stats (Our Impact) ---------- */
+
+.stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* Four in a row only when each card is wide enough for "25–50 Lakh". */
+@container (min-width: 480px) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 8px 14px;
+  border: 1px solid #edf3e6;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f9ea 100%);
+  box-shadow: 0 14px 26px -22px rgba(30, 50, 20, 0.45);
+  text-align: center;
+}
+
+.statIcon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 4px;
+  color: var(--tone-fg, var(--color-leaf-600));
+}
+
+.statValue {
+  color: var(--color-ink-900);
+  font-size: clamp(17px, 1.45vw, 21px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.statLabel {
+  color: var(--color-text-700);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* ---------- Pins (Our Presence) ---------- */
+
+.pins {
+  /* Space either side of the divider; narrower on small phones. */
+  --pin-space: clamp(14px, 5vw, 28px);
+
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 10px 0;
+}
+
+.pin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px var(--pin-space) 10px 0;
+  color: var(--color-ink-900);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.pin + .pin {
+  padding-left: var(--pin-space);
+  border-left: 1px solid var(--color-line);
+}
+
+.pin:last-child {
+  padding-right: 0;
+}
+
+.pinIcon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  fill: var(--color-leaf-600);
+}
+
+/* ---------- Covers (FEED WORLD) ---------- */
+
+.covers {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Four in a row only when each cover is at least ~115px wide, which the
+   "FEED WORLD" masthead and the longest title word ("Opportunities") need. */
+@container (min-width: 490px) {
+  .covers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #eaefe5;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f7fb 100%);
+  box-shadow: 0 18px 28px -20px rgba(20, 40, 30, 0.55);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.cover:hover {
+  transform: translateY(-3px) rotate(-0.6deg);
+}
+
+.coverMast {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 9px 6px;
+  border-bottom: 1px solid #edf1ea;
+  background: var(--color-white);
+  color: var(--color-forest-700);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.coverLeaf {
+  flex: none;
+  width: 15px;
+  height: 15px;
+}
+
+.coverTitle {
+  min-height: calc(2 * 1.25em + 14px);
+  padding: 8px 9px 6px;
+  color: var(--color-ink-900);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.coverImage {
+  width: 100%;
+  aspect-ratio: 188 / 100;
+  margin-top: auto;
+  object-fit: cover;
+}
+
+/* ---------- Tiers (Membership card levels) ---------- */
+
+.tiers {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 0;
+  padding: 14px 0;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 247, 234, 0.7));
+  border: 1px solid #f3ece0;
+}
+
+@media (min-width: 520px) {
+  .tiers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  text-align: center;
+}
+
+.tier:nth-child(even),
+.tier + .tier {
+  border-left: 1px solid #efe6d8;
+}
+
+@media (max-width: 519.98px) {
+  .tier:nth-child(odd) {
+    border-left: 0;
+  }
+}
+
+.tierIcon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+  color: #f08a00;
+}
+
+.tierLabel {
+  color: var(--color-ink-900);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.tierCaption {
+  color: var(--color-text-500);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- Coming soon (Collaborators) ---------- */
+
+.soon {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 26px;
+  border: 1.5px dashed #b6dc8a;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f5fbee 0%, #ffffff 100%);
+}
+
+.soonIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--color-lime-200);
+  color: var(--color-forest-600);
+}
+
+.soonIcon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.soonTitle {
+  color: var(--color-forest-700);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.soonText {
+  margin-top: 4px;
+  color: var(--color-text-700);
+  font-size: 14px;
+}
+
+/* ---------- Call to action (Become a Member) ---------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #45a52c 0%, #1f6f13 100%);
+  box-shadow: 0 14px 24px -14px rgba(31, 111, 19, 0.85);
+  color: var(--color-white);
+  font-size: 15.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.2s var(--ease-out),
+    box-shadow 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 28px -14px rgba(31, 111, 19, 0.9);
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--color-leaf-600);
+  outline-offset: 3px;
+}
+
+.ctaIcon {
+  width: 18px;
+  height: 18px;
+}

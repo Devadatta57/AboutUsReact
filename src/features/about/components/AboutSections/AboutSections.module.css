@@ -1,0 +1,64 @@
+/*
+ * About-page sections (01 to 08) below the hero: an "On This Page" card on
+ * the left and the numbered sections on the right, on a soft background with
+ * the farmland strip along the bottom.
+ */
+
+.wrapper {
+  position: relative;
+  isolation: isolate;
+  /* clip, not hidden, so the sticky "On This Page" card keeps working. */
+  overflow: clip;
+  padding-bottom: clamp(150px, 17vw, 270px);
+  background:
+    radial-gradient(60% 40% at 0% 0%, rgba(158, 219, 87, 0.12), transparent 70%),
+    radial-gradient(50% 30% at 100% 55%, rgba(254, 204, 2, 0.06), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #fbfdf8 55%, #f7faf1 100%);
+}
+
+/* ---------- Bottom decoration ---------- */
+
+.decor {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: clamp(170px, 22vw, 340px);
+  pointer-events: none;
+}
+
+.landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.75;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+}
+
+/* ---------- Layout ---------- */
+
+.layout {
+  /* Side padding; the phone/tablet "On This Page" bar uses it to run edge to edge. */
+  --page-pad: clamp(16px, 4vw, 56px);
+
+  max-width: 1360px;
+  margin-inline: auto;
+  padding: clamp(20px, 3.5vw, 48px) var(--page-pad) 0;
+}
+
+.sections {
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: clamp(32px, 3.4vw, 52px);
+    align-items: start;
+  }
+}

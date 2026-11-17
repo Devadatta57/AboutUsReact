@@ -1,0 +1,107 @@
+/* Sizes are in cqw (percent of the card's width), so the card scales as one. */
+.card {
+  container-type: inline-size;
+  position: relative;
+  width: min(100%, 380px);
+  aspect-ratio: 1.586;
+  overflow: hidden;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(255, 255, 255, 0.14), transparent 55%),
+    linear-gradient(140deg, #128a36 0%, #0a6b2a 48%, #064f1e 100%);
+  color: var(--color-white);
+  box-shadow:
+    0 30px 44px -26px rgba(5, 60, 20, 0.75),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: rotate(-3deg);
+}
+
+/* Orange and gold sweep in the bottom-right corner. */
+.card::before,
+.card::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.card::before {
+  right: -34%;
+  bottom: -62%;
+  width: 92%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffd24a 0%, #f39a0c 60%);
+  transform: rotate(-18deg);
+}
+
+.card::after {
+  right: -30%;
+  bottom: -60%;
+  width: 92%;
+  height: 100%;
+  border: 0.7cqw solid rgba(255, 255, 255, 0.55);
+  transform: rotate(-18deg) translate(-3%, -4%);
+}
+
+.brand {
+  position: absolute;
+  top: 10%;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  gap: 2.6cqw;
+}
+
+.leaf {
+  width: 13cqw;
+  height: 13cqw;
+}
+
+.brandName {
+  display: block;
+  font-size: 11.5cqw;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.brandSub {
+  display: block;
+  margin-top: 0.8cqw;
+  font-size: 3.6cqw;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.contactless {
+  position: absolute;
+  top: 11%;
+  right: 8%;
+  width: 9cqw;
+  height: 9cqw;
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.chip {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  width: 14cqw;
+  height: 10.5cqw;
+  border-radius: 1.8cqw;
+  background:
+    linear-gradient(90deg, transparent 32%, rgba(120, 82, 10, 0.35) 32%, rgba(120, 82, 10, 0.35) 36%, transparent 36%, transparent 64%, rgba(120, 82, 10, 0.35) 64%, rgba(120, 82, 10, 0.35) 68%, transparent 68%),
+    linear-gradient(0deg, transparent 46%, rgba(120, 82, 10, 0.35) 46%, rgba(120, 82, 10, 0.35) 54%, transparent 54%),
+    linear-gradient(135deg, #fbe7a1 0%, #e9be55 50%, #c99428 100%);
+}
+
+.label {
+  position: absolute;
+  top: 54%;
+  left: 29%;
+  max-width: 44%;
+  font-size: 5.6cqw;
+  font-weight: 600;
+  line-height: 1.25;
+}

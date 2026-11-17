@@ -1,0 +1,55 @@
+.figure {
+  margin: 0;
+}
+
+/* The photos keep the leaf-like frame from the design; their white backdrop
+   is multiplied away so they sit on the page's soft background. */
+.photo {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+/* FEED logo (portrait, white backdrop): kept to a modest size and centred. */
+.logo {
+  display: block;
+  width: min(100%, 250px);
+  height: auto;
+  margin-inline: auto;
+  mix-blend-mode: multiply;
+}
+
+/* Full-bleed photo (no white backdrop): rounded frame with leaf-style
+   corners to echo the design's photo frames. */
+.picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 56px 18px 56px 18px;
+  box-shadow: 0 22px 40px -28px rgba(28, 74, 16, 0.4);
+}
+
+/* Just the India map (cut out on a transparent background), no frame;
+   a soft shadow follows the map's own outline. */
+.map {
+  display: block;
+  width: min(100%, 300px);
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 16px 20px rgba(28, 74, 16, 0.16));
+}
+
+/* FEED Membership & Reward Card picture (transparent background, already tilted). */
+.cardImage {
+  display: block;
+  width: min(100%, 400px);
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 22px 22px rgba(5, 60, 20, 0.22));
+}
+
+.cardWrap {
+  display: grid;
+  place-items: center;
+  padding: 14px 6px 18px;
+}

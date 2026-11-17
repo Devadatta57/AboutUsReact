@@ -1,0 +1,32 @@
+/* Design tokens — single source of truth for colours, type and spacing.
+   Colours are sampled from the About-page design mockup. */
+:root {
+  /* Brand colours */
+  --color-forest-700: #033a05; /* headings, eyebrow */
+  --color-forest-600: #014a06; /* emphasis text */
+  --color-leaf-600: #3f9b2a;
+  --color-leaf-500: #60be06; /* quote mark, leaves */
+  --color-leaf-300: #9edb57;
+  --color-sun-500: #f79203; /* "Global Markets" */
+  --color-sun-300: #fecc02;
+  --color-ink-900: #0a0a14; /* tagline */
+  --color-ink-800: #111218; /* body / quote */
+  --color-white: #ffffff;
+
+  /* About sections (01-08) */
+  --color-lime-200: #d6efa6; /* number badges */
+  --color-mist-50: #f3f9ec; /* soft green panels */
+  --color-line: #e6ece0; /* dividers */
+  --color-text-700: #2b302b; /* body copy */
+  --color-text-500: #59615a; /* captions */
+  --color-sky-600: #2b7bd6;
+
+  /* Typography */
+  --font-sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout */
+  --gutter: clamp(16px, 5.5vw, 104px);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

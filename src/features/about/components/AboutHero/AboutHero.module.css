@@ -1,0 +1,206 @@
+/*
+ * About hero.
+ *
+ * Desktop (>= 900px) reproduces the 1670-wide design as a proportional
+ * "artboard": every size and position is a design-pixel value multiplied by
+ * --u (one design pixel). The artboard is 1670 x 900 design px (the mockup with
+ * 30px trimmed above the copy, then 60px added so the FEED logo and the
+ * quote fit beside the collage), and --u is capped by both the window width and
+ * the window height, so the whole hero, fields included, is visible without
+ * scrolling.
+ * Smaller screens get a stacked, normally-flowing layout.
+ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 1920px;
+  margin-inline: auto;
+  padding: 48px var(--gutter) clamp(120px, 26vw, 220px);
+}
+
+/* ---------- Copy (mobile / tablet first) ---------- */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* "About Us": the page heading, centred at the top with a dash either side.
+   The negative margin trims the stage's 36px gap to 30px above the logo. */
+.eyebrow {
+  display: flex;
+  align-self: center;
+  width: fit-content;
+  margin-bottom: -6px;
+  font-size: clamp(24px, 6.6vw, 38px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.eyebrow::after {
+  content: '';
+  width: 1.35em;
+  height: max(2px, 0.09em);
+  background: currentColor;
+}
+
+/* Below the heading: logo, then quote. */
+
+/* FEED logo. The JPEG has a white backdrop; multiply lets the hero
+   background show through it. */
+.logo {
+  display: block;
+  align-self: center;
+  /* Centred over the quote below it. */
+  margin-inline: auto;
+  width: clamp(140px, 38vw, 210px);
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+/* Quote under the logo: the main message of the page, so it is set large. */
+.quote {
+  position: relative;
+  margin: 24px 0 0;
+  padding-left: 1.5em;
+  font-size: clamp(17px, 4.6vw, 22px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-800);
+}
+
+/* Opening quote mark, level with the top of line one and lined up with the
+   logo's left edge. */
+.quoteMark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 2.2em;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-leaf-500);
+}
+
+/* Closing quote mark, styled like the opening one. A small inline box keeps
+   its place at the end of the last line without changing the line height;
+   the big glyph hangs from it. */
+.quoteMarkClose {
+  position: relative;
+  display: inline-block;
+  width: 1.4em;
+  height: 1em;
+}
+
+.quoteMarkClose::before {
+  content: '\201D';
+  position: absolute;
+  left: 0.08em;
+  top: -0.03em;
+  font-size: 2.2em;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-leaf-500);
+}
+
+.quote strong {
+  font-weight: 600;
+  color: var(--color-forest-600);
+}
+
+.quoteLine {
+  display: inline;
+}
+
+/* ---------- Media ---------- */
+
+.media {
+  align-self: center;
+  max-width: 560px;
+}
+
+/* ---------- Desktop artboard ---------- */
+
+@media (min-width: 900px) {
+  .hero {
+    container-type: inline-size;
+  }
+
+  .stage {
+    /* One design pixel: fit the 1670 x 900 artboard inside the window.
+       --site-header-height lets a future sticky navbar be subtracted. */
+    --u: min(
+      calc(100cqw / 1670),
+      calc((100vh - var(--site-header-height, 0px)) / 900)
+    );
+
+    display: block;
+    width: calc(1670 * var(--u));
+    max-width: none;
+    height: calc(900 * var(--u));
+    padding: 0;
+  }
+
+  /* "About Us" centred across the top, half an inch (48 design px) below
+     the artboard's original 22 px top offset. */
+  .eyebrow {
+    position: absolute;
+    top: calc(70 * var(--u));
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+    font-size: calc(40 * var(--u));
+  }
+
+  /* Logo and quote beside the collage. The top is set so the quote's last
+     line ends on the collage photo's bottom line (y = 699):
+     216 + 295 (logo) + 28 (gap) + 4 x 40 (quote lines) = 699. */
+  .content {
+    position: absolute;
+    left: calc(97 * var(--u));
+    top: calc(216 * var(--u));
+    display: block;
+  }
+
+  /* 240 x 295 design px: kept small so the quote is the focus. */
+  .logo {
+    width: calc(240 * var(--u));
+  }
+
+  .quote {
+    margin-top: calc(28 * var(--u));
+    font-size: calc(28 * var(--u));
+    line-height: calc(40 * var(--u));
+  }
+
+  .quoteLine {
+    display: block;
+  }
+
+  /* Collage at ~80% of the mockup's 1010 px so it doesn't dominate the hero.
+     It keeps a right margin matching the copy's left margin (~97), and its
+     photo's bottom line stays level with the end of the quote (y = 699). */
+  .media {
+    position: absolute;
+    left: calc(760 * var(--u));
+    top: calc(180 * var(--u));
+    width: calc(820 * var(--u));
+    max-width: none;
+  }
+}

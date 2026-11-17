@@ -1,0 +1,16 @@
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  font-size: clamp(18px, 1.9vw, 32px);
+  font-weight: 700;
+  color: var(--color-forest-700);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.35em;
+  height: max(2px, 0.09em);
+  background: currentColor;
+}
